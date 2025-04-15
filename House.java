@@ -33,6 +33,7 @@ public class House extends Building implements HouseRequirements{
 
   /**
    * add a student to the house
+   * @param s student moving in
    */
   public void moveIn(Student s) {
     this.residents.add(s);
