@@ -4,6 +4,12 @@ public class Building implements BuildingRequirements {
     protected String address = "<Address Unknown>";
     protected int nFloors = 1;
 
+    /**
+     * Constructor
+     * @param name the name of the building
+     * @param address the location of the building 
+     * @param nFloors the number of floors in the building
+     */
     public Building(String name, String address, int nFloors) {
         if (name != null) { this.name = name; }
         if (address != null) { this.address = address; } 

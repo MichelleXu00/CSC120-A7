@@ -7,7 +7,13 @@ public class House extends Building implements HouseRequirements{
   private ArrayList<Student> residents; // The <Student> tells Java what kind of data we plan to store IN the ArrayList
   private boolean hasDiningRoom;
 
-  //Constructor
+  /**
+   * Constructor
+   * @param name the name of the house
+   * @param address the location of the house
+   * @param nFloors the number of floors in the house
+   * @param hasDR whether the house has a dining room
+   */
   public House(String name, String address, int nFloors, boolean hasDR) {
     super(name,address,nFloors);
     System.out.println("You have built a house: 🏠");
@@ -45,7 +51,9 @@ public class House extends Building implements HouseRequirements{
    * @return the student who moved out
    */
   public Student moveOut(Student s) {// return the Student who moved out
-    this.residents.remove(s);
+    if (!residents.contains(s)) {
+      throw new RuntimeException(s + "is not a resident here!");
+    } this.residents.remove(s);
     return s;
   }
 

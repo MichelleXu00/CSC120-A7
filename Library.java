@@ -6,7 +6,12 @@ public class Library extends Building implements LibraryRequirements{
   //Attributes
   private Hashtable<String, Boolean> collection;
   
-  //Constructor
+  /**
+   * Constructor
+   * @param name the name of the library
+   * @param address the location of the library
+   * @param nFloors the number of floors in the library
+   */
   public Library(String name, String address, int nFloors) {
     super(name,address,nFloors);
     System.out.println("You have built a library: 📖");
@@ -27,7 +32,9 @@ public class Library extends Building implements LibraryRequirements{
    * @return title of the book being removed
    */
   public String removeTitle(String title) {// return the title that we removed
-    this.collection.remove(title,false);
+    if (!collection.containsKey(title)) {
+      throw new RuntimeException (title + "is not in the collection of" + this.name + "library.");
+    } this.collection.remove(title,false);
     return title;
   }
 
@@ -36,9 +43,9 @@ public class Library extends Building implements LibraryRequirements{
    * @param title title of the book needed to be checked out
    */
   public void checkOut(String title) {
-    if (this.collection.containsKey(title) && this.collection.get(title)== true) {
-      addTitle(title);
-    }
+    if (!this.collection.containsKey(title) || this.collection.get(title) == false) {
+      throw new RuntimeException (title + "is not available in" + this.name + "library.");
+    } removeTitle(title);
   }
 
   /**
@@ -46,9 +53,9 @@ public class Library extends Building implements LibraryRequirements{
    * @param title title of the book needed to be returned
    */
   public void returnBook(String title) {
-    if (this.collection.containsKey(title) && this.collection.get(title) == false) {
-      removeTitle(title);
-    }
+    if (!this.collection.containsKey(title) && this.collection.get(title) == true) {
+      throw new RuntimeException (title + "is already returned into" + this.name + "library.");
+    } addTitle(title);
   }
 
   /**
@@ -57,10 +64,7 @@ public class Library extends Building implements LibraryRequirements{
    * @return T/F
    */
   public boolean containsTitle(String title) {
-    if (this.collection.containsKey(title)) {
-      return true;
-    }
-    return false;
+    return this.collection.containsKey(title);
   }  
   
   /**
@@ -69,10 +73,7 @@ public class Library extends Building implements LibraryRequirements{
    * @return T/F
    */
   public boolean isAvailable(String title) {
-    if (this.collection.get(title) == true) {
-      return true;
-    }
-    return false;
+    return this.collection.get(title);
   }
   
   /**
