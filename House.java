@@ -63,10 +63,7 @@ public class House extends Building implements HouseRequirements{
    * @return T/F
    */
   public boolean isResident(Student s) {
-    if (this.residents.contains(s)) {
-      return true;
-    }
-    return false;
+    return this.residents.contains(s);
   }
 
   public static void main(String[] args) {
